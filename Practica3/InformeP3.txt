@@ -1,0 +1,169 @@
+ESTUDIO EMPÍRICO DE LA COMPLEJIDAD: DICCIONARIO DE DATOS
+
+Autores:
+    José Comerón Lago, Ismael Brea Arias, Andrés Rey Luna.
+
+Introducción:
+    En este estudio, se analizará empíricamente la complejidad computacional de distintas
+    implementaciones de Diccionarios de Datos, con el objetivo de comparar el rendimiento de
+    diferentes técnicas de resolución de colisiones en tablas de dispersión cerrada. Para ello, se
+    utilizarán los datos del archivo sinonimos.txt, que contiene 19,062 entradas. Se analizarán
+    tres estrategias de resolución de colisiones: exploración lineal, exploración cuadrática y
+    exploración doble. Además, se utilizarán dos funciones de dispersión, dispersionA y
+    dispersionB, para evaluar cómo afectan al tiempo de inserción y búsqueda. El objetivo final
+    es determinar cuál de las combinaciones ofrece un mejor rendimiento y si se obtiene una
+    complejidad cercana a O(n) en todos los casos.
+
+Características de la máquina:
+
+    Nombre comercial: Lenovo Legion 5 Gen 6
+    Procesador: AMD Ryzen 7 5800H with Radeon Graphics
+    Memoria RAM: 16 GB DDR5 4800 MHz (2x8GB)
+    Almacenamiento: 1 TB SSD M.2 NVMe PCIe 3.0
+    GPU: NVIDIA® GeForce RTX™ 3070 Laptop GPU
+    Sistema operativo: Ubuntu 23.10
+    Cálculo de cotas y constantes:
+
+Cotas:
+
+    Cota ajustada: Una cota se considera ajustada si los resultados se aproximan de
+    manera clara y consistente a una constante. Esta cota refleja adecuadamente el tiempo de
+    ejecución real del algoritmo para grandes valores de n.
+
+    Cota ligeramente sobreestimada/subestimada: Esta cota es válida cuando la
+    aproximación es suficientemente cercana a la cota ajustada, representando una buena
+    estimación del tiempo de ejecución real.
+
+Mediciones:
+    El tiempo de ejecución se medirá en microsegundos, usando el formato t(n) para cada
+    tamaño de array n. En casos donde el tiempo de ejecución es menor a 500 ms, se realizarán
+    1000 ejecuciones para obtener un promedio representativo, indicado con "(*)". Las
+    mediciones marcadas con "/" son consideradas anómalas y no se tomarán en cuenta para
+    las conclusiones.
+
+***Dispersion cerrada lineal con dispersion A: 
+Insertando 19062 elementos...
+total de colisiones: 172623183
+Buscando n elementos...
+
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+           125      8812.000000      185.159704       70.496000       26.839998
+           250     16224.000000      195.796954       64.896000       21.509481
+           500     35781.000000      248.014156       71.562000       20.648498
+          1000     65222.000000      259.653459       65.222000       16.383026
+          2000    134200.000000      306.851690       67.100000       14.672919
+          4000    265669.000000      348.893508       66.417250       12.643546
+          8000    558079.000000      420.943387       69.759875       11.560795
+         16000   1070911.000000      463.935273       66.931938        9.656270
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1
+        Constante a la que tiende: 67.0
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: No parece haber mediciones anómalas
+        
+
+
+
+***Dispersion cerrada cuadratica con dispersion A: 
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+(*)        125       147.156000        1.907915        1.068882        0.448215
+(*)        250       286.833000        1.992889        1.027378        0.380278
+           500       624.000000        2.323334        1.102136        0.360098
+          1000      1205.000000        2.404291        1.049511        0.302682
+          2000      2344.000000        2.506286        1.006716        0.256284
+          4000      4593.000000        2.631737        0.972737        0.218587
+          8000     10596.000000        3.253576        1.106599        0.219500
+         16000     20192.000000        3.322549        1.039865        0.182069
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.02
+        Constante a la que tiende: 1.05
+        Cota ligeramente subestimada: n^0.9
+        Observaciones: No parece haber mediciones anómalas
+        
+
+
+
+***Dispersion cerrada doble con dispersion A: 
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+(*)        125       134.868000        1.748598        0.847527        0.410787
+(*)        250       263.044000        1.827605        0.798346        0.348739
+           500       584.000000        2.174402        0.856041        0.337015
+          1000      1041.000000        2.077068        0.736972        0.261487
+          2000      2184.000000        2.335208        0.746743        0.238790
+          4000      4380.000000        2.509690        0.723288        0.208450
+          8000      9967.000000        3.060437        0.794914        0.206470
+         16000     20196.000000        3.323207        0.777928        0.182105
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.05
+        Constante a la que tiende: 0.75
+        Cota ligeramente subestimada: n^0.9
+        Observaciones: No parece haber mediciones anómalas
+        
+
+***Dispersion cerrada lineal con dispersion B: 
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+(*)        125        20.573000        0.266734        0.209524        0.062662
+(*)        250        49.836000        0.346256        0.262724        0.066072
+(*)        500        46.298000        0.172381        0.126340        0.026718
+(*)       1000        89.248000        0.178073        0.126066        0.022418
+(*)       2000       184.525000        0.197301        0.134920        0.020175
+(*)       4000       347.921000        0.199355        0.131681        0.016558
+          8000       687.000000        0.210948        0.134593        0.014231
+         16000      1295.000000        0.213089        0.131328        0.011677
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^0.95
+        Constante a la que tiende: 0.132
+        Cota ligeramente subestimada: n^0.9
+        Observaciones: No parece haber mediciones anómalas
+        
+
+***Dispersion cerrada cuadratica con dispersion B: 
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+(*)        125        18.303000        0.237303        0.104431        0.055748
+(*)        250        24.883000        0.172885        0.067625        0.032989
+(*)        500        52.067000        0.193861        0.067401        0.030047
+(*)       1000        87.232000        0.174051        0.053787        0.021912
+(*)       2000       167.204000        0.178780        0.049107        0.018281
+(*)       4000       329.922000        0.189042        0.046154        0.015701
+          8000       675.000000        0.207263        0.044978        0.013983
+         16000      1281.000000        0.210786        0.040658        0.011551
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.07
+        Constante a la que tiende: 0.045
+        Cota ligeramente subestimada: n^0.9
+        Observaciones: No parece haber mediciones anómalas
+        
+
+***Dispersion cerrada doble con dispersion B: 
+            n              t(n)   t(n)/subestimada  (n)/ajustada    (n)/n^sobreestimada
+(*)        125        18.711000        0.393160        0.149688        0.056991
+(*)        250        26.589000        0.320885        0.106356        0.035251
+(*)        500        52.693000        0.365239        0.105386        0.030408
+(*)       1000       107.138000        0.426524        0.107138        0.026912
+(*)       2000       191.011000        0.436751        0.095505        0.020884
+(*)       4000       374.874000        0.492308        0.093719        0.017841
+          8000       775.000000        0.584561        0.096875        0.016054
+         16000      1447.000000        0.626863        0.090438        0.013047
+
+Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1
+        Constante a la que tiende: 0.095
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: No parece haber mediciones anómalas
+        
+
+
+Conclusiones:
+    Todas las dispersiones ya sean tipo A o B tienen complejidad cercana a O(n), sin
+    embargo el tiempo de estas varían mucho dependiendo de la cantidad de colisiones
+    que se produzcan. Podemos observar que la dispersiónA produce muchas más colisiones
+    que la dispersionB y esto hace que su tiempo de ejecución sea mayor. También 
+    podemos concluir que la dispersión lineal produce más colisiones que la cuadrática
+    y doble, sin embargo estas últimas tienen un tiempoo de ejecucion muy similar. 
+
+

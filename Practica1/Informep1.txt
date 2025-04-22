@@ -1,0 +1,119 @@
+ESTUDIO EMPIRÍCO DE LA COMPLEJIDAD P0 FIBONACCI
+
+·Autores:
+    Ismael Brea Arias.
+
+·Introducción:
+
+    En este documento, calcularemos empíricamente la complejidad de diferentes implementaciones del algoritmo de Fibonacci.
+    Existen varias formas de implementar un algoritmo para calcular los términos de esta secuencia, y cada implementación
+    tiene una complejidad diferente en términos de tiempo de ejecución, estudiaremos fib1 (Este es el método más simple y directo,
+    basado en la definición recursiva), fib2 (Este algoritmo evita la recursión usando un bucle, acumulando los valores en dos variables)
+    y fib3 (Este algoritmo se basa en el uso de la multiplicación de matrices para calcular Fibonacci en tiempo logarítmico)
+
+·Caracteristicas de la máquina:
+
+    Nombre comercial: VivoBook_ASUSLaptop X415JAB_F415JA
+    Procesador: Intel Core i5-1035G1
+    Memoria RAM: 8 GB DDR4 3200 MHz (1x8GB)
+    Almacenamiento: 512 GB SSD M.2 NVMe PCIe 3.0
+    SO: Ubuntu 24.04.1 LTS
+
+
+·Cálculo de cotas y constantes:
+
+    Cota Ajustada:
+
+        Se considera que una cota es ajustada si hay una clara aproximación de los resultados a una constante.
+        En este caso, la cota refleja adecuadamente el tiempo de ejecución real del algoritmo para valores grandes de n.
+
+    Cota Ligeramente Sobreestimada/Subestimada:
+
+   
+        Una cota se considera ligeramente sobreestimada o subestimada si se aproxima lo suficiente a la cota ajustada,
+        representando así una buena aproximación a la complejidad real del algoritmo. Esto es útil para describir cotas que,
+        aunque no son perfectas, son cercanas al comportamiento real del tiempo de ejecución.
+
+
+·Mediciones:
+
+    En las tablas de mediciones podemos ver el tiempo(en microsegundos) que tarda cada algoritmo en ejecutarse,
+    t(n) es tiempo en microsegundos que tarda el algoritmo en dar el resultado de el Fibonacci de n números.
+    Como no tomamos en cuenta mediciones de menos de 500 ms, en los casos en los que el tiempo de ejecucion es menor,
+    se aplicará una estrategia de medicion de tiempos pequeños que consiste en calcular el promedio de 1000 ejecuciones
+    ya que el tiempo de ejecucion de un algoritmo 1000 veces siempre es mayor a 500 ms estas ejecuciones estarán marcadas
+    con "(*)". Las mediciones marcadas con "/" se consideran mediciones anómalas y no se tienen en cuenta a la hora de
+    sacar conclusiones.
+
+    Fib1
+               n          t(microS)      t(n)/1.1^n   t(n)/1.61^n      t(n)/1.7^n
+
+    (*)           2        0.01524       0.012595       0.005821       0.005273
+    (*)           4        0.04071       0.027805       0.005940       0.004874
+    (*)           8        0.28759       0.134163       0.006122       0.004123
+    (*)          16       13.38668       2.913332       0.006066       0.002751
+                 32    29973.00000    1419.594436       0.006154       0.001266
+
+    Cota ligeramente sobreestimada: 1.7^n
+    Cota ajustada: 1.61^n
+    Constante a la que tiende: 0.00590
+    Cota ligeramente subestimada: 1.1^n
+    Observaciones: No parece haber mediciones anómalas
+             
+
+    Fib2
+              n           t(microS)     t(n)/n^0.8      t(n)/n      t(n)/n*log(n)
+
+    (*)        1000          1.983       0.007896       0.001983       0.000287
+    (*)       10000         19.862       0.012532       0.001986       0.000216
+    (*)      100000        198.649       0.019865       0.001986       0.000173
+            1000000       1995.000       0.031619       0.001995       0.000144
+           10000000      19859.000       0.049884       0.001986       0.000123
+           
+    Cota ligeramente sobreestimada: n^log(n)
+    Cota ajustada: n
+    Constante a la que tiende: 0.01990
+    Cota ligeramente subestimada: n^0.8
+    Observaciones: 2 mediciones anómalas en la primera tabla
+
+
+    Fib3
+
+                n        t(microS)   t(n)/sqrt(log(n))  t(n)/log(n)   t(n)/n^0.4
+
+    (*)        1000          0.036       0.013595       0.005172       0.002254
+    (*)       10000          0.048       0.015925       0.005247       0.001214
+    (*)      100000          0.065       0.019177       0.005652       0.000651
+    (*)     1000000          0.077       0.020791       0.005594       0.000308
+    (*)    10000000          0.087       0.021628       0.005387       0.000138
+
+    Cota ligeramente sobreestimada: n^0.4
+    Cota ajustada: log(n)
+    Constante a la que tiende: 0.00550
+    Cota ligeramente subestimada: sqrt(log(n))
+    Observaciones: No parece haber mediciones anómalas
+    
+·Conclusiones:
+
+    Este estudio pone de manifiesto la importancia de elegir la implementación adecuada del 
+    algoritmo de Fibonacci según las necesidades específicas del problema. Las pruebas 
+    evidencian que, aunque la implementación recursiva es conceptualmente sencilla (fib1), es 
+    ineficiente para valores grandes de n. En contraste, los enfoques iterativos y de 
+    matrices ofrecen soluciones más óptimas. Los resultados obtenidos proporcionan una 
+    base sólida para la selección de algoritmos en contextos donde se requiere un cálculo 
+    eficiente de números de Fibonacci.
+
+    El orden de mayor a menor eficiencia sería: Fib3, Fib2, Fib3.
+
+    Las cotas ajustadas obtenidas con el estudio empírico se aproximan mucho a las teóricas
+        
+        algoritmos        Teórica         práctica
+             Fib1        O(o**n)           1.61^n
+             Fib2        O(n)                 n
+             Fib3        O(log(n))          log(n)
+
+
+·Extra:
+    Por causa de usar diferentes progresiones geométricas con los 3 algoritmos
+    no reutilizamos la funcion "medir_tiempos" para los 3 algoritmos, en las
+    siguientes prácticas reutilizaremos esas funciones.

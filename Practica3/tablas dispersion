@@ -1,0 +1,107 @@
+DISPERSIONES
+
+
+función Dispersión1 (Clave, TamañoClave): Índice
+    valor := ascii(Clave[1]);
+    para i := 2 hasta TamañoClave hacer
+        valor := valor + ascii(Clave[i])
+    fin para
+    devolver valor mod N
+fin función
+
+*******DISPERSIÓN ABIERTA*********
+tipo Índice = 0..N-1
+tipo Posición = ^Nodo
+tipo Lista = Posición
+
+tipo Nodo = registro
+    Elemento : TipoElemento
+    Siguiente : Posición
+fin registro
+
+tipo TablaDispersión = vector [Índice] de Lista
+
+
+procedimiento InicializarTabla (T)
+    para i := 0 hasta N-1 hacer
+        CrearLista(T[i])
+    fin para
+fin procedimiento
+
+
+función Buscar (Elem, Tabla) : Posición
+    i := Dispersión(Elem);
+    devolver BuscarLista(Elem, Tabla[i])
+fin función
+
+
+procedimiento Insertar (Elem, Tabla)
+    pos := Buscar(Elem, Tabla); (* No inserta repetidos *)
+    si pos = nil entonces
+        i := Dispersión(Elem);
+        InsertarLista(Elem, Tabla[i])
+fin procedimiento
+
+
+
+
+*********DISPERSIÓN CERRADA************
+tipo ClaseDeEntrada = (legítima, vacía, eliminada)
+tipo Índice = 0..N-1
+tipo Posición = Índice
+tipo Posición = ^Nodo
+tipo Lista = Posición
+
+tipo Entrada = registro
+    Elemento : TipoElemento
+    Información : ClaseDeEntrada
+    Siguiente : Posición
+fin registro
+
+tipo TablaDispersión = vector[Índice] de Entrada
+tipo TablaDispersión = vector [Índice] de Lista
+
+
+
+procedimiento InicializarTabla (D)
+    para i := 0 hasta N-1 hacer
+        D[i].Información := vacía
+    fin para
+fin procedimiento
+
+
+
+
+función  Buscar (Elem, D): Posición
+    i := 0;
+    x = Dispersión(Elem);
+    PosActual = x;
+    mientras D[PosActual].Información <> vacía y D[PosActual].Elemento <> Elem hacer
+        i := i + 1:
+        PosActual := (x + FunResoluciónColisión(x, i)) mod N
+    fin mientras;
+    devolver PosActual
+fin función
+
+(* La búsqueda finaliza al caer en una celda vacía *)
+(* o al encontrar el elemento (legítimo o borrado) *)
+
+
+
+procedimiento Insertar (Elem, D)
+    pos = Buscar(Elem, D);
+    si D[pos].Información <> legítima
+    entonces (* Bueno para insertar *)
+        D[pos].Elemento := Elem;
+        D[pos].Información := Legítima
+fin procedimiento
+
+
+
+
+procedimiento Eliminar (Elem, D)
+    pos = Buscar(Elem, D);
+    si D[pos].Información = legítima
+    entonces
+        D[pos].Información := eliminada
+fin procedimiento

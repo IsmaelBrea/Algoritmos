@@ -1,0 +1,165 @@
+ESTUDIO EMPIRÍCO DE LA COMPLEJIDAD P2: ORDENACIÓN POR INSERCIÓN Y ORDENACIÓN RÁPIDA
+
+·Autores:
+    Ismael Brea Arias.
+
+·Introducción:
+
+    En este documento, calcularemos empíricamente la complejidad de diferentes implementaciones de algoritmos
+    de ordenación, específicamente el método de Ordenación por Inserción y Ordenación Rápida. 
+    Ambos algoritmos son populares en el ámbito de la programación y cada uno tiene características y eficiencias 
+    diferentes en términos de tiempo de ejecución. Estudiaremos el comportamiento de la Ordenación por 
+    Inserción (insert_sort), que es un método simple y directo, y la Ordenación Rápida (quick_sort), que es más 
+    eficiente para grandes conjuntos de datos en arrays ordenados ascendentemente, descendentemente y pseudoaleatorios
+    (con la función rand()). Además se realizarán tests para asegurar el correcto funcinamiento de las inicializaciones.
+
+·Caracteristicas de la máquina:
+
+    Nombre comercial: VivoBook_ASUSLaptop X415JAB_F415JA
+    Procesador: Intel Core i5-1035G1
+    Memoria RAM: 8 GB DDR4 3200 MHz (1x8GB)
+    Almacenamiento: 512 GB SSD M.2 NVMe PCIe 3.0
+    SO: Ubuntu 24.04.1 LTS
+
+
+·Cálculo de cotas y constantes:
+
+    Cota Ajustada:
+
+        Se considera que una cota es ajustada si hay una clara aproximación de los resultados a una constante.
+        En este caso, la cota refleja adecuadamente el tiempo de ejecución real del algoritmo para valores grandes de n.
+
+    Cota Ligeramente Sobreestimada/Subestimada:
+   
+        Una cota se considera ligeramente sobreestimada o subestimada si se aproxima lo suficiente a la cota ajustada,
+        representando así una buena aproximación a la complejidad real del algoritmo. Esto es útil para describir cotas que,
+        aunque no son perfectas, son cercanas al comportamiento real del tiempo de ejecución.
+
+
+·Mediciones:
+
+    En las tablas de mediciones podemos ver el tiempo(en microsegundos) que tarda cada algoritmo en ejecutarse,
+    t(n) es tiempo en microsegundos que tarda el algoritmo en ordenar todos el array de de n números según cada tipo 
+    de inicialización. Como no tomamos en cuenta mediciones de menos de 500 ms, en los casos en los que el tiempo de 
+    ejecucion es menor, se aplicará una estrategia de medicion de tiempos pequeños que consiste en calcular el promedio 
+    de 1000 ejecuciones ya que el tiempo de ejecucion de un algoritmo 1000 veces siempre es mayor a 500 ms estas ejecuciones 
+    estarán marcadas con "(*)". Las mediciones marcadas con "/" se consideran mediciones anómalas y no se tienen en cuenta 
+    a la hora de sacar conclusiones.
+
+    
+    VECTOR EN ORDEN ASCENDENTE
+    Ordenacion por Insercion con Inicialización ascendente
+                n              t(n)      t(n)/n^0.95         t(n)/n       t(n)/n^1.1
+    (*)        500         3.049000        0.008320        0.006098        0.003276
+    (*)       1000         6.142000        0.008676        0.006142        0.003078
+    (*)       2000        12.184000        0.008909        0.006092        0.002849
+    (*)       4000        25.556000        0.009672        0.006389        0.002788
+    (*)       8000        50.731000        0.009939        0.006341        0.002582
+    (*)      16000       101.524000        0.010296        0.006345        0.002410
+    (*)      32000       201.945000        0.010601        0.006311        0.002236
+
+        Cota ligeramente sobreestimada: n^1.1
+        Cota ajustada: n
+        Constante a la que tiende: 0.00632
+        Cota ligeramente subestimada: n^0.95
+        Observaciones: No parece haber mediciones anómalas
+
+
+    Ordenacion Rápida con Inicialización ascendente
+                n              t(n)       t(n)/n^1        t(n)/n^1.06     t(n)/n^1.3
+    (*)        500        48.360000        0.096720        0.066616        0.014991
+    (*)       1000        97.782000        0.097782        0.064604        0.012310
+    (*)       2000       208.777000        0.104388        0.066159        0.010674
+    (*)       4000       429.395000        0.107349        0.065264        0.008916
+              8000       908.000000        0.113500        0.066193        0.007657
+             16000      1859.000000        0.116187        0.065000        0.006367
+             32000      3837.000000        0.119906        0.064348        0.005337
+
+
+        Cota ligeramente sobreestimada: n^1.3
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.0649
+        Cota ligeramente subestimada: n
+        Observaciones: No parece haber mediciones anómalas
+
+
+    VECTOR EN ORDEN DESCENDENTE
+    Ordenacion por Insercion con Inicialización descendente
+                n              t(n)       t(n)/n^1.9      t(n)/n^2.01     t(n)/n^2.1
+    (*)        500       498.923000        0.003715        0.001875        0.001072
+              1000      1754.000000        0.003500        0.001637        0.000879
+              2000      7694.000000        0.004113        0.001783        0.000899
+              4000     32733.000000        0.004689        0.001883        0.000893
+              8000    131623.000000        0.005052        0.001880        0.000837
+             16000    531272.000000        0.005464        0.001884        0.000788
+             32000   2144132.000000        0.005908        0.001888        0.000742
+
+        Cota ligeramente sobreestimada: n^2.1
+        Cota ajustada: n^2.01
+        Constante a la que tiende: 0.001885
+        Cota ligeramente subestimada: n^1.9
+        Observaciones: No parece haber mediciones anómalas
+
+
+    Ordenacion Rápida con Inicialización descendente
+                n              t(n)       t(n)/n^1        t(n)/n^1.059    t(n)/n^1.2
+    (*)        500        50.182000        0.100364        0.069557        0.028959
+    (*)       1000       102.083000        0.102083        0.067913        0.025642
+    (*)       2000       217.150000        0.108575        0.069338        0.023742
+    (*)       4000       455.492000        0.113873        0.069807        0.021677
+              8000       964.000000        0.120500        0.070910        0.019970
+             16000      1956.000000        0.122250        0.069057        0.017637
+             32000      4045.000000        0.126406        0.068543        0.015876
+            
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.059
+        Constante a la que tiende: 0.0693
+        Cota ligeramente subestimada: n
+        Observaciones: No parece haber mediciones anómalas
+
+
+    VECTOR DESORDENADO
+    Ordenacion por Insercion con Inicialización desordenada 
+                n              t(n)       t(n)/n^1.9      t(n)/n^2        t(n)/n^2.1
+    (*)        500       272.368000        0.002028        0.001089        0.000585
+              1000      1072.000000        0.002139        0.001072        0.000537
+              2000      4078.000000        0.002180        0.001020        0.000477
+              4000     17636.000000        0.002526        0.001102        0.000481
+              8000     69871.000000        0.002682        0.001092        0.000444
+             16000    278181.000000        0.002861        0.001087        0.000413
+             32000   1093518.000000        0.003013        0.001068        0.000378
+
+        Cota ligeramente sobreestimada: n^2.1
+        Cota ajustada: n^2
+        Constante a la que tiende: 0.00108
+        Cota ligeramente subestimada: n^1.9
+        Observaciones: No parece haber mediciones anómalas
+        
+
+    Ordenacion Rápida con inicializacion desordenada
+                n              t(n)       t(n)/n^1        t(n)/n^1.062    t(n)/n^1.2
+    (*)        500        84.258000        0.168516        0.114632        0.048624
+    (*)       1000       183.092000        0.183092        0.119308        0.045991
+    (*)       2000       400.456000        0.200228        0.124986        0.043784
+              4000       907.000000        0.226750        0.135587        0.043165
+              8000      1882.000000        0.235250        0.134753        0.038986
+             16000      3423.000000        0.213938        0.117390        0.030865
+             32000      7779.000000        0.243094        0.127778        0.030531
+                
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.062
+        Constante a la que tiende: 0.129
+        Cota ligeramente subestimada: n
+        Observaciones: No parece haber mediciones anómalas
+
+    
+·Conclusiones:
+
+    En este estudio, comprobamos que la Ordenación por Inserción es muy eficiente en listas ya ordenadas
+    (complejidad lineal), pero se vuelve mucho más lenta en listas desordenadas o en orden inverso 
+    (complejidad cuadrática). Por otro lado, la Ordenación Rápida es más eficiente en general, especialmente 
+    en listas grandes y desordenadas, con un rendimiento cercano a su mejor caso (n log n). Concluimos que 
+    la Ordenación por Inserción es buena para listas pequeñas o casi ordenadas, mientras que la Ordenación 
+    Rápida es mejor para listas grandes.
+
+    

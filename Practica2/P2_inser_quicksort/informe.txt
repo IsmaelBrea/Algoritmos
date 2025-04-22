@@ -1,0 +1,284 @@
+En el siguiente informe, realizaremos el estudio de 2 algoritmos de ordenacion: por insercion y quicksort. Nos han proporcionado los pseudocodigos, hemos implementado los algoritmos y hemos calculado el tiempo de ejecucion para O.
+---------------------------------------------------------------------------
+Hemos realizado las mediciones en una maquina con las siguientes 
+caracteristicas:
+- CPU: 11th Gen i5-1135G7	2.40GHz
+- RAM: 8GB
+- SO: Ubuntu 22.04.1
+---------------------------------------------------------------------------
+Los tiempos estan representados en microsegundos.
+La n, que indica la cantidad de elementos del vector a ordenar, sigue una progresion geometrica de razon 2, comenzando en 500 y llegando hasta 32000.
+---------------------------------------------------------------------------
+						ORDENACION POR INSERCION
+---------------------------------------------------------------------------
+Para el algoritmo de ordenacion por insercion, realizaremos los calculos sobre 3 distintas situaciones iniciales de los vectores: que sean aleatorios, que esten ordenados ascendentemente y que esten ordenados descendentemente.
+Los tiempos medidos mediante bucles (<500 microsegundos) han sido calculados con 10000 iteraciones. Estan marcados con "(*)".
+---------------------------------------------------------------------------
+Para el primer caso (vector ordenado ascendentemente), utilizamos n para la cota ajustada, n^0.9 para la subestimada y n^1.1 para la sobreestimada.
+
+La siguiente tabla muestra los valores para 7 entradas de la progresion geometrica:
+
+                            ---Vector ascendente---
+                            
+             n           t(n)      t(n)/n^0.9       t(n)/n       t(n)/n^1.1
+(*)         500          1.283     0.00477698     0.00256600     0.00137835
+(*)        1000          2.521     0.00503046     0.00252120     0.00126359
+(*)        2000          5.032     0.00538028     0.00251595     0.00117652
+(*)        4000         10.132     0.00580558     0.00253302     0.00110518
+(*)        8000         20.231     0.00621207     0.00252888     0.00102948
+(*)       16000         39.361     0.00647680     0.00246007     0.00093441
+(*)       32000         77.521     0.00683573     0.00242253     0.00085853
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.0025
+---------------------------------------------------------------------------
+Para el segundo caso (vector ordenado descendentemente), utilizamos n^2 para la cota ajustada, n^1.8 para la subestimada y n^2.2 para la sobreestimada.
+
+La siguiente tabla muestra los valores para 7 entradas de la progresion geometrica:
+
+                           ---Vector descendente---
+                           
+             n           t(n)      t(n)/n^1.8      t(n)/n^2      t(n)/n^2.2
+(*)         500        266.862     0.00369948     0.00106745     0.00030800
+           1000       1035.000     0.00412041     0.00103500     0.00025998
+           2000       4123.000     0.00471367     0.00103075     0.00022540
+           4000      16708.000     0.00548550     0.00104425     0.00019879
+           8000      69027.000     0.00650814     0.00107855     0.00017874
+          16000     268551.000     0.00727128     0.00104903     0.00015134
+          32000    1085059.000     0.00843691     0.00105963     0.00013308
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.0010
+---------------------------------------------------------------------------
+Para el tercer caso (vector desordenado), utilizamos n^2 para la cota ajustada, n^1.8 para la subestimada y n^2.2 para la sobreestimada.
+
+La siguiente tabla muestra los valores para 7 entradas de la progresion geometrica:
+
+                             ---Vector aleatorio---
+                             
+             n           t(n)      t(n)/n^1.8      t(n)/n^2      t(n)/n^2.2
+(*)         500        142.682     0.00197799     0.00057073     0.00016468
+           1000        526.000     0.00209404     0.00052600     0.00013213
+           2000       2047.000     0.00234026     0.00051175     0.00011191
+           4000       8621.000     0.00283041     0.00053881     0.00010257
+           8000      33646.000     0.00317228     0.00052572     0.00008712
+          16000     132394.000     0.00358470     0.00051716     0.00007461
+          32000     534406.000     0.00415529     0.00052188     0.00006555
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.0005
+---------------------------------------------------------------------------
+En cuanto a las complejidades, observando los tiempos obtenidos podemos concluir que para un vector ordenado ascendentemente esta es lineal, mientras que para uno desordenado u ordenado descendentemente es cuadratica.
+---------------------------------------------------------------------------
+						   ORDENACION RAPIDA
+---------------------------------------------------------------------------
+							 ASCENDENTE
+---------------------------------------------------------------------------
+En el caso de la ordenacion rapida (usando quicksort e insercion), aparte de los tres posibles estados
+iniciales para los vectores; ascendente, descendente y desordenado; se estudiara tambien como afectan
+tres distintos valores para el UMBRAL; 1, 10 y 100.
+Los tiempos medidos mediante bucles (<500 microsegundos) han sido calculados con 1000 iteraciones. Estan marcados con "(*)". /* mas iteraciones supondrian una carga excesiva para este algoritmo */
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 1
+En el primero de los casos, vector ordenado ascendentemente, la cota ajustada sera n^1.08, n^0.9 para
+la subestimada y la sobreestimada con valor n^1.3.
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+ 
+                     ---(UMBRAL 1) Vector ascendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9    t(n)/n^1.08     t(n)/n^1.3
+(*)         500         19.983       0.074403       0.024309       0.006194
+(*)        1000         42.710       0.085218       0.024577       0.005377
+(*)        2000         90.820       0.097108       0.024721       0.004643
+(*)        4000        191.981       0.110003       0.024719       0.003986
+(*)        8000        406.316       0.124762       0.024747       0.003426
+          16000        850.000       0.139866       0.024489       0.002911
+          32000       1776.000       0.156606       0.024204       0.002470
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.024
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 10
+-La cota ajustada sera n^1.11 y el UMBRAL 10, las demas condiciones seran iguales a la anterior
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+ 
+                     ---(UMBRAL 10) Vector ascendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9    t(n)/n^1.11     t(n)/n^1.3
+(*)         500         12.931       0.048146       0.013055       0.004008
+(*)        1000         28.644       0.057152       0.013398       0.003606
+(*)        2000         62.187       0.066492       0.013476       0.003180
+(*)        4000        138.064       0.079109       0.013861       0.002867
+(*)        8000        298.668       0.091708       0.013892       0.002519
+          16000        631.000       0.103830       0.013597       0.002161
+          32000       1386.000       0.122216       0.013837       0.001928
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.013
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 100
+-La cota ajustada sera n^1.2 y el UMBRAL 100, las demas condiciones seran iguales a la anterior
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+
+                     ---(UMBRAL 100) Vector ascendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9     t(n)/n^1.2     t(n)/n^1.3
+(*)         500          5.898       0.021960       0.003404       0.001828
+(*)        1000         15.347       0.030621       0.003855       0.001932
+(*)        2000         35.346       0.037793       0.003865       0.001807
+(*)        4000         81.340       0.046607       0.003871       0.001689
+(*)        8000        187.214       0.057485       0.003878       0.001579
+(*)       16000        416.018       0.068455       0.003751       0.001425
+          32000        918.000       0.080948       0.003603       0.001277
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.003
+---------------------------------------------------------------------------
+							DESCENDENTE
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 1
+Para el segundo caso, vector ordenado descendentemente, la cota ajustada sera n^1.08, n^0.9 para
+la subestimada y la sobreestimada con valor n^1.3
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+
+                    ---(UMBRAL 1) Vector descendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9    t(n)/n^1.08     t(n)/n^1.3
+(*)         500         20.800       0.077444       0.025303       0.006448
+(*)        1000         44.003       0.087798       0.025321       0.005540
+(*)        2000         93.424       0.099892       0.025430       0.004777
+(*)        4000        197.447       0.113135       0.025423       0.004100
+(*)        8000        416.027       0.127744       0.025339       0.003508
+          16000        876.000       0.144144       0.025238       0.003000
+          32000       1814.000       0.159957       0.024722       0.002523
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.025
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 10
+-La cota ajustada sera n^1.1 y el UMBRAL 10, el resto de condiciones son iguales al anterior 
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+
+                    ---(UMBRAL 10) Vector descendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9     t(n)/n^1.1     t(n)/n^1.3
+(*)         500         15.186       0.056542       0.016315       0.004707
+(*)        1000         32.668       0.065181       0.016373       0.004113
+(*)        2000         70.709       0.075605       0.016533       0.003615
+(*)        4000        151.339       0.086716       0.016508       0.003142
+(*)        8000        327.966       0.100704       0.016689       0.002766
+          16000        689.000       0.113373       0.016356       0.002360
+          32000       1533.000       0.135178       0.016978       0.002132
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.016
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 100
+-La cota ajustada sera n^1.118 y el UMBRAL 100, las demas condiciones son iguales a la anterior
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+
+                    ---(UMBRAL 100) Vector descendente (QUICKSORT)---
+
+             n           t(n)       t(n)/n^0.9    t(n)/n^1.118    t(n)/n^1.3
+(*)         500          8.531       0.031763       0.008195       0.002644
+(*)        1000         18.459       0.036831       0.008170       0.002324
+(*)        2000         39.877       0.042638       0.008132       0.002039
+(*)        4000         89.552       0.051312       0.008413       0.001860
+(*)        8000        198.832       0.061053       0.008607       0.001677
+(*)       16000        438.855       0.072213       0.008752       0.001503
+          32000        961.000       0.084740       0.008830       0.001337
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.008
+---------------------------------------------------------------------------
+							DESORDENADO
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 1
+El tercer caso, vector desordenado, utiliza de cota ajustada n^1.1, para la superestimada n y para
+la subestimada n^1.3
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+ 
+                       ---(UMBRAL 1) Vector aleatorio (QUICKSORT)---
+
+             n           t(n)         t(n)/n       t(n)/n^1.1     t(n)/n^1.3
+(*)         500         33.130       0.123353       0.035592       0.010270
+(*)        1000         72.903       0.145461       0.036538       0.009178
+(*)        2000        157.572       0.168481       0.036842       0.008056
+(*)        4000        343.022       0.196548       0.037416       0.007123
+           8000        721.000       0.221388       0.036689       0.006080
+          16000       1548.000       0.254720       0.036748       0.005302
+          32000       3240.000       0.285700       0.035882       0.004507
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.036
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 10
+-La cota ajustada sera n^1.112 y el UMBRAL 10, las demas condiciones son las mismas que la anterior
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+ 
+                       ---(UMBRAL 10) Vector aleatorio (QUICKSORT)---
+
+             n           t(n)         t(n)/n      t(n)/n^1.112    t(n)/n^1.3
+(*)         500         28.628       0.057256       0.028545       0.008874
+(*)        1000         63.383       0.063383       0.029240       0.007979
+(*)        2000        140.294       0.070147       0.029943       0.007173
+(*)        4000        303.278       0.075820       0.029947       0.006297
+           8000        649.000       0.081125       0.029649       0.005473
+          16000       1392.000       0.087000       0.029421       0.004767
+          32000       2968.000       0.092750       0.029023       0.004128
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.029
+---------------------------------------------------------------------------
+-El UMBRAL estara fijo a 100
+-La cota ajustada sera n^1.1 y el UMBRAL 100, las demas condiciones son las mismas que la anterior
+
+La siguiente tabla muestra los valores para las primeras 7 entradas de la progresion geometrica:
+ 
+                       ---(UMBRAL 100) Vector aleatorio (QUICKSORT)---
+
+             n           t(n)         t(n)/n       t(n)/n^1.1     t(n)/n^1.3
+(*)         500         32.763       0.065526       0.035198       0.010156
+(*)        1000         72.390       0.072390       0.036281       0.009113
+(*)        2000        155.612       0.077806       0.036384       0.007956
+(*)        4000        337.649       0.084412       0.036830       0.007011
+           8000        718.000       0.089750       0.036536       0.006055
+          16000       1532.000       0.095750       0.036369       0.005247
+          32000       3307.000       0.103344       0.036624       0.004600
+
+---------------------------------------------------------------------------
+Podemos observar que la sucesion de la cota ajustada tiende aproximadamente a 0.036
+---------------------------------------------------------------------------
+Deducimos del estudio de estos tres estados base del vector que las ordenacioes mas rapida se dan en
+los vectores ordenados ascendente y descendentemente. El vector desordenado requiere algo mas de 
+tiempo. Dentro del vector ascendente, el caso mas rapido lo obtenemos con un valor para el UMBRAL de
+100, al igual que para el caso del descendente, puede ser debido a que al estar el vector inicializado
+con cierto orden (no es aleatoria la desordenacion), a mayor UMBRAL, mayor rapidez. Sin embargo para
+el vector desordenado, con un UMBRAL de 10 conseguimos el mejor tiempo. Esto puede ser debido a que 
+al combinar ordenacion rapida e insercion, con un UMBRAL medio se alcanza la mayor eficiencia entre
+ambos combinados. 
+---------------------------------------------------------------------------
+En cuanto a las complejidades, observando los tiempos obtenidos podemos concluir que para los tres
+casos esta es lineal.
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						

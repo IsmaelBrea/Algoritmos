@@ -1,0 +1,8 @@
+COMO COMPILAR LAS PŔACTICAS
+
+gcc -o p1 p1.c -lm
+./p1
+
+
+valgrind --leak-check=full ./p1
+

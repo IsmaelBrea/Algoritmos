@@ -1,0 +1,97 @@
+// HECHO POR LUCAS PIÑEIRO AÑON Y ANTONIO PARADA MIRANDA //
+
+A continuacion llevaremos a cabo el estudio del algoritmo de ordenacion por monticulos. Se nos ha proporcionado el codigo de la funcion de ordenacion por monticulos, y hemos tenido
+que implementar la funcion de hundir, eliminar mayor y crear monticulo. Ademas, hemos realizado el estudio de su complejidad (O).
+---------------------------------------------------------------------------
+Hemos realizado las mediciones en una maquina con las siguientes 
+caracteristicas:
+- CPU: 11th Gen i5-1135G7	2.40GHz
+- RAM: 8GB
+- SO: Ubuntu 22.04.1
+---------------------------------------------------------------------------
+Los tiempos estan representados en microsegundos. Para los casos en los que el tiempo es <500 microsegundos (indicados con un (*)), hemos calculado t como el promedio de los t
+resultantes de repetir el proceso k veces (en este caso k=1000).
+La n indica el numero de valores a insertar en un monticulo. Sigue una progresion geometrica de razon 2 (comenzando en n=1000).
+Los numeros con los que realizamos las pruebas son valores aleatorios comprendidos entre -n y n.
+---------------------------------------------------------------------------
+Primero, y antes de estudiar la complejidad de la ordenacion por monticulos, estudiaremos la complejidad de la creacion un monticulo.
+
+La siguiente tabla muestra los valores obtenidos para 9 entradas de la progresion geometrica:
+
+                    ---Test crear monticulo---
+
+             n           t(n)         t(n)/n
+(*)        1000         15.438       0.015438
+(*)        2000         30.082       0.015041
+(*)        4000         60.490       0.015122
+(*)        8000        121.213       0.015152
+(*)       16000        240.612       0.015038
+(*)       32000        468.921       0.014654
+          64000        931.000       0.014547
+         128000       2019.000       0.015773
+         256000       4029.000       0.015738
+         
+La sucesion de la cota ajustada tiende a un valor aproximado de 0.015
+-----------------------------------------------------------------------------
+Ahora estudiaremos la complejidad de la ordenacion por monticulos para 3 casos diferentes de vectores; ascendente, descendente y aleatorio.
+
+Ordenacion por monticulos para un vector ordenado ascendentemente:
+
+                    ---Vector ascendente---
+
+             n           t(n)       t(n)/n^0.9   t(n)/n*log(n)    t(n)/n^1.3
+(*)        1000         64.293       0.128281       0.009307       0.008094
+(*)        2000        150.898       0.161345       0.009926       0.007715
+(*)        4000        336.048       0.192552       0.010129       0.006978
+           8000        748.000       0.229679       0.010404       0.006308
+          16000       1636.000       0.269200       0.010563       0.005603
+          32000       3431.000       0.302542       0.010336       0.004772
+          64000       6756.000       0.319248       0.009539       0.003816
+         128000      14647.000       0.370902       0.009731       0.003360
+         256000      29837.000       0.404892       0.009359       0.002780
+
+La sucesion de la cota ajustada tiende a un valor aproximado de 0.01
+-----------------------------------------------------------------------------------
+Ordenacion por monticulos para un vector ordenado descendentemente:
+
+                    ---Vector descendente---
+
+             n           t(n)       t(n)/n^0.9   t(n)/n*log(n)    t(n)/n^1.3
+(*)        1000         62.192       0.124089       0.009003       0.007830
+(*)        2000        143.585       0.153526       0.009445       0.007341
+(*)        4000        326.571       0.187121       0.009844       0.006781
+           8000        752.000       0.230907       0.010459       0.006342
+          16000       1580.000       0.259985       0.010201       0.005411
+          32000       3368.000       0.296987       0.010146       0.004685
+          64000       6494.000       0.306867       0.009169       0.003668
+         128000      14411.000       0.364926       0.009574       0.003306
+         256000      30264.000       0.410686       0.009493       0.002820
+
+La sucesion de la cota ajustada tiende a un valor aproximado de 0.01
+-----------------------------------------------------------------------------------
+Ordenacion por monticulos para un vector ordenado aleatoriamente:
+
+                    ---Vector aleatorio---
+
+             n           t(n)       t(n)/n^0.9   t(n)/n*log(n)    t(n)/n^1.3
+(*)        1000         95.197       0.189943       0.013781       0.011985
+(*)        2000        201.955       0.215937       0.013285       0.010326
+(*)        4000        433.939       0.248642       0.013080       0.009011
+           8000        932.000       0.286177       0.012963       0.007860
+          16000       2007.000       0.330247       0.012958       0.006874
+          32000       4301.000       0.379258       0.012957       0.005982
+          64000       9385.000       0.443478       0.013251       0.005302
+         128000      20323.000       0.514634       0.013501       0.004662
+         256000      43022.000       0.583814       0.013495       0.004008
+
+La sucesion de la cota ajustada tiende a un valor aproximado de 0.013
+------------------------------------------------------------------------------------
+Siguiendo el orden anterior, primero hablaremos sobre la complejidad de creacion de monticulo y despues sobre la de ordenacion de monticulo.
+
+Nos piden estudiar si la complejidad de la funcion crear monticulo es O(n) y como podemos ver en la tabla, se cumple que la complejidad
+teorica y la empirica coinciden. Se demuestra en la tabla mediante el estudio de una secuencia ascendente de numeros.
+
+Para la funcion ordenacion de monticulo la complejidad teorica y empirica tambien coinciden, siendo n*log(n) para ambas. Observamos que la 
+sucesion de la cota ajustada tiende al mismo valor para los vectores ascendente y descendente, podemos sacar de conclusion de esto que la funcion ordenar monticulo se comporta de
+manera analoga para un vector previamente ordenado, ascendente o descendentemente.
+

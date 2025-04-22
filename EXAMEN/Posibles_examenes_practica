@@ -1,0 +1,32 @@
+HAY VARIOS EXAMENES DISTINTOS. HAY QUE PONER NUESTRO ENUNCIADO EN EL INFORME
+los pesudocodigos van de 1 a n
+en c esto se adapta de 0 a n-1
+
+1-fibonnaci
+otro codigo que calcula fibonacci -> nos dan el pseudocodigo, pasamos a C, comprobamos su funcionamiento y medir tiempos de esa función (no se dice la cota)
+
+2-algoritmos de ordenación
+CASO 1:
+cambiar la forma en la que se elige el pivote -> por una en la que usar mediana, o de otra forma distinta
+comprobar que todo funciona igual, pero ahora comprobar los tiempos de ejecución para ascendente, descendente, aleaotorio
+
+
+CASO2:
+Implementar otra nueva función de ordenación, sin decirnos cual es. Solo nos dan el pseudocodigo
+
+
+3-tablas de dispersión
+CASO1:
+implementar dispersión abierta -> nos proporcionan un poco de código
+Habría que crear un nuevo diccionario con cada una de las funciones de dispersion
+
+CASO2: 
+A partir de la tabla cerrada -> cambiar o añadir una nueva función hash y cambiar el factor de carga. Volver a estudiar sus casos
+
+
+4-montículos
+CASO1: sin nada de pesudocódigo
+cambiar el montículos de mínimos a máximos -> cambiar consultarMenor por consultarMayor y corregir la función de ordenación. Volver a hacer el estudio empírico
+
+CASO2:
+clacular el k-esimo numero de un vectorc-> implementarlo a partir del codigo que tenemos de monticulos. Para un numero determinar la complejidad

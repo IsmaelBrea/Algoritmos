@@ -1,0 +1,100 @@
+ESTUDIO EMPÍRICO DE LA COMPLEJIDAD: MONTÍCULO DE MÍNIMOS
+
+Autores:
+    Ismael Brea Arias
+
+Introducción:
+    En este estudio se analizará empíricamente operaciones con montículos de MÍNIMOS
+    concretamente la complejidad de la determinación del k-ésimo mayor con un
+    array aleatorio en dos casos, cuando k es el noveno mayor (k=9) y cuando k es 
+    n/2 siendo n el tamaño del vector.
+
+Características de la máquina:
+
+    Nombre comercial: VivoBook_ASUSLaptop X415JAB_F415JA
+    Procesador: Intel Core i5-1035G1
+    Memoria RAM: 8 GB DDR4 3200 MHz (1x8GB)
+    Almacenamiento: 512 GB SSD M.2 NVMe PCIe 3.0
+    SO: Ubuntu 24.04.1 LTS
+
+    
+    Cálculo de cotas y constantes:
+
+Cotas:
+
+    Cota ajustada: Una cota se considera ajustada si los resultados se aproximan de
+    manera clara y consistente a una constante. Esta cota refleja adecuadamente el tiempo de
+    ejecución real del algoritmo para grandes valores de n.
+
+    Cota ligeramente sobreestimada/subestimada: Esta cota es válida cuando la
+    aproximación es suficientemente cercana a la cota ajustada, representando una buena
+    estimación del tiempo de ejecución real.
+
+Mediciones:
+    El tiempo de ejecución se medirá en microsegundos, usando el formato t(n) para cada
+    tamaño de array n. En casos donde el tiempo de ejecución es menor a 500 microsegundos, se realizarán
+    1000 ejecuciones para obtener un promedio representativo, indicado con "(*)". Las
+    mediciones marcadas con "/" son consideradas anómalas y no se tomarán en cuenta para
+    las conclusiones.
+
+
+------------------------------------------------------------------------------------
+prueba empirica de la complejidad de kesimoMayor para k=9
+
+            n             t(microS)          t(n)/n^0.8          t(n)/nlogn          t(n)/n^1.2
+#*         2000          6.97500000          0.01594851          0.00221031          0.00076262
+#*         4000         13.08200000          0.01718012          0.00198834          0.00062259
+*          8000         19.46900000          0.01468492          0.00141928          0.00040331
+*         16000         42.40800000          0.01837180          0.00148279          0.00038239
+*         32000         84.04800000          0.02091257          0.00140951          0.00032987
+*         64000        159.31900000          0.02276793          0.00128149          0.00027218
+*        128000        305.20800000          0.02505117          0.00117748          0.00022696
+         256000        816.00000000          0.03846787          0.00150993          0.00026412
+         
+        
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.014
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: Hay 2 mediciones anómalas en las primeras iteraciones
+
+
+------------------------------------------------------------------------------------
+Test6: prueba empirica de la complejidad de kesimoMayor para k=n/2
+
+             n             t(microS)         t(n)/n^0.8          t(n)/nlogn          t(n)/n^1.2
+*          2000        103.60900000          0.23690460          0.03283263          0.01132822
+*          4000        217.53000000          0.28567430          0.03306249          0.01035255
+           8000        538.00000000          0.40579836          0.03921994          0.01114485
+          16000       1062.00000000          0.46007489          0.03713277          0.00957592
+#         32000       2823.00000000          0.70241034          0.04734258          0.01107977
+#         64000       5636.00000000          0.80542852          0.04533360          0.00962842
+         128000       9215.00000000          0.75635793          0.03555108          0.00685241
+         256000      19513.00000000          0.91988190          0.03610686          0.00631591
+         
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.034
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: Hay 2 mediciones anómalas en las iteraciones del medio
+
+
+
+        
+-Comparación de las dos mediciones de los algoritmos:
+Hemos utilizado las mismas cotas para medir las dos situciones del algoritmo y podemos observar 
+como el primer caso para k=9 es mucho mád raṕido que el segundo caso para k=n/2 poeque tiene que
+quitar menos elementos.
+
+   
+ 
+Conclusiones:
+
+    Tras el análisis empírico podemos confirmar que insertarMonticulo tiene una complejidad de O(nlogn)
+    y crearMonticulo o(n), no parece haber mediciones anómalas más allá de las dos primeras en
+    insertarMonticulo. Por otra parte ordenarMontículo tiene un tiempo de ejcucion mucho menor con
+    vectores ascendentes y descendes comparado con uno aleatorio a pesar de que tengan los 3 una
+    complejidad cercana a nlogn.
+    Tras el análisis del k-ésimo mayor podemos confirmar que tiene una compeljidad de O(n^2) en la 
+    primera solución y O(n*log(n)) en las siguientes.
+    

@@ -1,0 +1,156 @@
+ESTUDIO EMPÍRICO DE LA COMPLEJIDAD: MONTÍCULO DE MÍNIMOS
+
+Autores:
+    José Comerón Lado, Ismael Brea Arias, Andrés Rey Luna.
+
+Introducción:
+    En este estudio se analizará empíricamente operaciones con montículos de MÍNIMOS
+    concretamente la complejidad de insertarMontículo,crearMontículo, así como 
+    ordenarMontículo con un array desordenado, e inicializado ascendente y
+    descendentemente.
+
+Características de la máquina:
+
+    Nombre comercial: Lenovo Legion 5 Gen 6
+    Procesador: AMD Ryzen 7 5800H with Radeon Graphics
+    Memoria RAM: 16 GB DDR5 4800 MHz (2x8GB)
+    Almacenamiento: 1 TB SSD M.2 NVMe PCIe 3.0
+    GPU: NVIDIA® GeForce RTX™ 3070 Laptop GPU
+    Sistema operativo: Ubuntu 23.10
+    Cálculo de cotas y constantes:
+
+Cotas:
+
+    Cota ajustada: Una cota se considera ajustada si los resultados se aproximan de
+    manera clara y consistente a una constante. Esta cota refleja adecuadamente el tiempo de
+    ejecución real del algoritmo para grandes valores de n.
+
+    Cota ligeramente sobreestimada/subestimada: Esta cota es válida cuando la
+    aproximación es suficientemente cercana a la cota ajustada, representando una buena
+    estimación del tiempo de ejecución real.
+
+Mediciones:
+    El tiempo de ejecución se medirá en microsegundos, usando el formato t(n) para cada
+    tamaño de array n. En casos donde el tiempo de ejecución es menor a 500 microsegundos, se realizarán
+    1000 ejecuciones para obtener un promedio representativo, indicado con "(*)". Las
+    mediciones marcadas con "/" son consideradas anómalas y no se tomarán en cuenta para
+    las conclusiones.
+
+prueba empirica de la complejidad de crearMonticulo
+
+             n             t(microS)          t(n)/n^0.8          t(n)/n             t(n)/n^1.2
+*          2000         30.86700000          0.07057818          0.01543350          0.00337488
+*          4000         56.42000000          0.07409435          0.01410500          0.00268510
+*          8000        111.18300000          0.08386223          0.01389788          0.00230319
+*         16000        211.21700000          0.09150248          0.01320106          0.00190452
+*         32000        422.29500000          0.10507417          0.01319672          0.00165743
+          64000        880.00000000          0.12575889          0.01375000          0.00150337
+         128000       1756.00000000          0.14413071          0.01371875          0.00130579
+         256000       3572.00000000          0.16839123          0.01395313          0.00115617
+
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1
+        Constante a la que tiende: 0.0138
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: No parece haber mediciones anómalas
+------------------------------------------------------------------------------------
+prueba empirica de la complejidad de insertarMonticulo
+
+             n             t(microS)          t(n)/n^0.8     t(n)/nlogn             t(n)/n^1.2
+#*     2000              18.812            0.043014            0.005961            0.002057
+#*     4000              48.466            0.063649            0.007366            0.002307
+*      8000             147.040            0.110908            0.010719            0.003046
+*     16000             342.348            0.148310            0.011970            0.003087
+      32000             692.000            0.172181            0.011605            0.002716
+      64000            1377.000            0.196784            0.011076            0.002352
+     128000            2804.000            0.230149            0.010818            0.002085
+
+        Cota ligeramente sobreestimada: n^1.2
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.011
+        Cota ligeramente subestimada: n^0.8
+        Observaciones: Hay 2 mediciones anómalas en las primeras iteraciones
+
+------------------------------------------------------------------------------------
+Aleatorio
+             n            t(microS)         t(n)/n^1             t(n)/nlogn         t(n)/n^1.3
+*          2000        205.46800000          0.10273400          0.04804091          0.01050522
+*          4000        448.09400000          0.11202350          0.04887684          0.00930446
+           8000        960.00000000          0.12000000          0.04885086          0.00809570
+          16000       2053.00000000          0.12831250          0.04873680          0.00703126
+          32000       4499.00000000          0.14059375          0.04982543          0.00625779
+          64000       9349.00000000          0.14607813          0.04830223          0.00528118
+         128000      22692.00000000          0.17728125          0.05469427          0.00520595
+         256000      45783.00000000          0.17883984          0.05148021          0.00426572
+
+        Cota ligeramente sobreestimada: n^1.3
+        Cota ajustada: n^1.1
+        Constante a la que tiende: 0.051
+        Cota ligeramente subestimada: n^1
+        Observaciones: No parece haber mediciones anómalas
+
+
+------------------------------------------------------------------------------------
+Ascendente
+             n            t(microS)         t(n)/n^1            t(n)/nlogn         t(n)/n^1.3
+*          2000        165.17100000          0.08258550          0.05234100          0.00844491
+*          4000        371.97100000          0.09299275          0.05653605          0.00772380
+           8000        764.00000000          0.09550000          0.05569523          0.00644283
+          16000       1618.00000000          0.10112500          0.05657328          0.00554144
+          32000       3248.00000000          0.10150000          0.05446996          0.00451774
+          64000       6775.00000000          0.10585938          0.05449523          0.00382715
+         128000      13974.00000000          0.10917188          0.05391110          0.00320588
+         256000      28755.00000000          0.11232422          0.05320825          0.00267918
+
+        Cota ligeramente sobreestimada: n^1.3
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.054
+        Cota ligeramente subestimada: n^1
+        Observaciones: No parece haber mediciones anómalas
+
+
+------------------------------------------------------------------------------------
+Descendente
+             n            t(microS)         t(n)/n^1            t(n)/nlogn         t(n)/n^1.3
+*          2000        184.77100000          0.09238550          0.05810868          0.00944702
+*          4000        380.11500000          0.09502875          0.05729667          0.00789291
+           8000        756.00000000          0.09450000          0.05461895          0.00637536
+          16000       1576.00000000          0.09850000          0.05457389          0.00539759
+          32000       3224.00000000          0.10075000          0.05350950          0.00448436
+          64000       6641.00000000          0.10376563          0.05282950          0.00375145
+         128000      13939.00000000          0.10889844          0.05314738          0.00319785
+         256000      28845.00000000          0.11267578          0.05271424          0.00268756
+
+        Cota ligeramente sobreestimada: n^1.3
+        Cota ajustada: n^1.06
+        Constante a la que tiende: 0.0529
+        Cota ligeramente subestimada: n^1
+        Observaciones: No parece haber mediciones anómalas
+        
+        
+-Comparación respecto a los algoritmos de ordenación de la p2:
+
+    En los tres casos de ordenación (aleatorio, ascendente y descendente), los resultados muestran que la
+    ordenación rápida es la más eficiente. Para los vectores aleatorios, su complejidad O(nlog⁡n)O(nlogn)
+    permitió un rendimiento constante y eficiente a medida que aumentaba el tamaño del vector. En cambio, la
+    ordenación por inserción tuvo un rendimiento mucho peor, especialmente en vectores más grandes, debido a su
+    complejidad O(n2)O(n2).
+
+    Para los vectores ascendentes, la ordenación por inserción fue más eficiente, ya que este algoritmo
+    funciona bien con datos parcialmente ordenados. Sin embargo, la ordenación rápida todavía fue más rápida,
+    aunque su ventaja no fue tan evidente en este caso.
+
+    En los vectores descendentes, la ordenación rápida siguió siendo la opción más eficiente, mientras que la
+    ordenación por inserción nuevamente mostró un desempeño lento debido a su complejidad cuadrática.
+
+    En resumen, la ordenación rápida siempre fue más eficiente, especialmente para vectores aleatorios,
+    mientras que la ordenación por inserción solo fue útil para vectores parcialmente ordenados, como los
+    ascendentes. 
+
+Conclusiones:
+
+    Tras el análisi empírico podemos confirmar que insertarMonticulo tiene una complejidad de O(nlogn)
+    y crearMonticulo o(n), no parece haber mediciones anómalas más allá de las dos primeras en
+    insertarMonticulo. Por otra parte ordenarMontículo tiene un tiempo de ejcucion mucho menor con
+    vectores ascendentes y descendes comparado con uno aleatorio a pesar de que tengan los 3 una
+    complejidad cercana a nlogn.
